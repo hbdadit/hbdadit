@@ -602,15 +602,15 @@ Semoga di umur yang baru ini makin banyak hal baik yang datang, selalu sehat, da
   <div class="back-button" onclick="showScreen('gallery-screen')">←</div>
   <div class="content-title">VIDEO PLAYER</div>
   
-  <div class="video-player-container">
-    <video id="embedded-video" controls style="width: 100%; max-height: 120px; border: 2px solid #8bac0f;">
+  <div class="video-player-container" style="width: 100%;">
+    <video id="embedded-video" controls style="display: block; margin: 0 auto; width: auto; height: auto; max-width: 100%; max-height: 90px; border: 2px solid #8bac0f;">
       <source src="vid02.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
   </div>
   
   <div style="font-size: 8px; margin-top: 10px; text-align: center; color: #8bac0f;">
-    <div id="video-title">Video Title</div>
+    <div id="video-title"></div>
   </div>
 </div>
     
@@ -646,13 +646,12 @@ Semoga di umur yang baru ini makin banyak hal baik yang datang, selalu sehat, da
   <div class="back-button" onclick="showScreen('january-gallery-screen')">←</div>
   <div class="content-title">JANUARY PHOTO</div>
   
-  <div style="display: flex; flex-direction: column; align-items: center; height: 100%;">
+  <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
     <!-- Foto yang akan ditampilkan secara penuh -->
-    <div id="detail-photo" style="width: 90%; height: 80%; border: 2px solid #8bac0f; background-size: contain; background-position: center;"></div>
+    <img id="detail-photo" alt="" style="display: block; width: auto; height: auto; max-width: 100%; max-height: 90px; flex: none; border: 2px solid #8bac0f; object-fit: contain;">
     
     <!-- Caption foto -->
     <div id="photo-caption" style="font-size: 8px; margin-top: 10px; text-align: center; color: #8bac0f;">
-      Photo details
     </div>
   </div>
   
@@ -2235,7 +2234,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (videoTitle) {
         const monthName = MONTH_NAMES[monthId] || monthId.replace('-gallery-screen', '');
         const num = Array.from(monthScreen.querySelectorAll('.gallery-item[data-video]')).indexOf(tile) + 1;
-        videoTitle.textContent = `Video #${num} dari ${monthName}`;
+        videoTitle.textContent = '';
       }
     }
   }
@@ -2296,14 +2295,14 @@ document.addEventListener('DOMContentLoaded', function() {
           if (detailPhoto) {
             // Gunakan foto dari mapping berdasarkan bulan dan indeks
             const photoPath = PHOTO_MAPPING[currentScreen][itemIndex];
-            detailPhoto.style.backgroundImage = `url(${photoPath})`;
+            detailPhoto.src = photoPath;
           }
 
           // Setel caption foto
           const photoCaption = document.getElementById('photo-caption');
           if (photoCaption) {
             const monthName = MONTH_NAMES[currentScreen] || currentScreen.replace('-gallery-screen', '');
-            photoCaption.textContent = `Foto #${itemIndex + 1} dari ${monthName}`;
+            photoCaption.textContent = '';
           }
 
           // Tampilkan layar detail
@@ -2336,7 +2335,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const videoTitle = document.getElementById('video-title');
           if (videoTitle) {
             const monthName = MONTH_NAMES[currentScreen] || currentScreen.replace('-gallery-screen', '');
-            videoTitle.textContent = `Video #${itemIndex - 7} dari ${monthName}`;
+            videoTitle.textContent = '';
           }
         }
       }
